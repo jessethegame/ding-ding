@@ -1,32 +1,22 @@
-.rgb-color {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background-color: white;
-
-  h1 {
-    font-size: 18px;
-    text-align: center;
-    margin-top: 45px;
+.buttons {
+  button {
+    color: white;
   }
 }
 
-.other-color {
+.servo-0 {
   background-color: black;
-  margin: 20px auto 0;
-  width: 250px;
-  height: 60px;
-  padding: 10px;
+}
 
-  input {
-    width: 100%;
-    height: 40px;
-    margin: 0 auto;
-    font-size: 20px;
+.servo-1 {
+  background-color: orange;
+}
 
-    text-align: center;
-  }
+.servo-2 {
+  background-color: yellow;
+  color: #999 !important;
+}
+
+.servo-3 {
+  background-color: green;
 }

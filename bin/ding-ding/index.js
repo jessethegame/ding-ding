@@ -72,8 +72,6 @@ board.on("ready", function() {
     process.stdin.setRawMode(true);
   } // Else not needed?
 
-  var playSequence = constants.defaultPlaySeq;
-
   // var button = new five.Button({
   //   pin: pins.pullUpButton,
   //   isPullup: true
@@ -134,7 +132,6 @@ board.on("ready", function() {
     }, constants.servoSwingSpeed);
 
     recorder.save(servoIndex);
-    playSequence = recorder.saved;
   }
 
   function ledOnOff() {
@@ -142,6 +139,10 @@ board.on("ready", function() {
     setTimeout(function() {
       led.off();
     }, constants.ledOnOffSpeed);
+  }
+
+  function isSpace(key) {
+    return key.name === "space";
   }
 
   var keymap = {
@@ -168,11 +169,8 @@ board.on("ready", function() {
     }
   }
 
-  var setPlaySequence = function(seq) {
-    playSequence = seq;
-  }
-
   var debouncedPlay = _.debounce(function() {
+    var playSequence = recorder.saved;
     player.play(playSequence, function(indices) {
       console.log("keys:", indices);
       _.each(indices, function(index) {
@@ -197,14 +195,18 @@ board.on("ready", function() {
       return;
     }
 
-    playKeyMap(key.name);
+    if (isSpace(key)) {
+      console.log("Reset recorder");
+      recorder.reset();
+    } else {
+      playKeyMap(key.name);
+    }
   });
 
   // Return the board and some info
   boardDeferred.resolve({
     board: board,
-    playServo: playServoIndex,
-    setPlaySequence: setPlaySequence
+    playServo: playServoIndex
   });
 });
 

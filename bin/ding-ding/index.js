@@ -9,16 +9,20 @@ var _ = require('lodash');
 var five = require("johnny-five");
 var board = new five.Board();
 
+var Player = require('./player');
+
 // Set up of the board
 var pins = {
-  pullUpButton: 2,  // Other pin in GND
-  led: 0,          // Negative end in GND
-  motor: 5,          // Other pin in GND
+  pullUpButton: 2, // Other pin in GND
+  led: 4,          // Negative end in GND
+  motor: 5,        // Other pin in GND
 };
 
 var constants = {
   servoSwingSpeed: 150,
   ledOnOffSpeed: 50,
+
+  buttonDebounce: 200,
 
   servoMin: 135,
   servoMax: 180,
@@ -69,20 +73,14 @@ board.on("ready", function() {
     });
   });
 
-
+  var player = new Player({
+    interval: 500
+  });
 
   board.repl.inject({
     servos: servos,
     button: button,
     led: led
-  });
-
-  button.on("down", function(value) {
-    led.on();
-  });
-
-  button.on("up", function() {
-    led.off();
   });
 
   /**
@@ -116,16 +114,45 @@ board.on("ready", function() {
     f: swingServo(3),
   };
 
+  var playKeyMap = function(key) {
+    var keyMapFunc = keymap[key];
+    if (keyMapFunc) {
+      keyMapFunc();
+      ledOnOff();
+    }
+  }
+
+  var debouncedPlay = _.debounce(function() {
+    player.play([
+      ['a'],
+      ['s'],
+      ['d'],
+      ['f'],
+      ['a', 's'],
+      ['d', 'f'],
+      ['a', 's', 'd', 'f']
+    ], function(keys) {
+      console.log("keys:", keys);
+      _.each(keys, function(key) {
+        playKeyMap(key);
+      });
+    });
+  }, constants.buttonDebounce);
+
+  button.on("down", function(value) {
+    debouncedPlay();
+  });
+
+  button.on("up", function() {
+
+  });
+
+  // Play key map when key is pressed
   process.stdin.on("keypress", function(ch, key) {
     if (!key) {
       return;
     }
 
-    var keyMapFunc = keymap[key.name];
-    if (keyMapFunc) {
-      keyMapFunc();
-      ledOnOff();
-    }
-
+    playKeyMap(key.name);
   });
 });

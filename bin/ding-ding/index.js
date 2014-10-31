@@ -12,6 +12,7 @@ var board = new five.Board();
 var boardDeferred = Q.defer();
 
 var Player = require('./player');
+var Recorder = require('./recorder');
 
 // Set up of the board
 var pins = {
@@ -49,14 +50,17 @@ var constants = {
   ],
 
   defaultPlaySeq: [
-    ['a'],
-    ['s'],
-    ['d'],
-    ['f'],
-    ['a', 's'],
-    ['d', 'f'],
-    ['a', 's', 'd', 'f']
-  ]
+    [0],
+    [1],
+    [2],
+    [3],
+    [0, 1],
+    [2, 3],
+    [1, 2, 3, 4]
+  ],
+
+  // How many key presses to record
+  defaultRecordLength: 10
 }
 
 board.on("ready", function() {
@@ -105,6 +109,10 @@ board.on("ready", function() {
     }
   });
 
+  var recorder = new Recorder({
+    length: constants.defaultRecordLength
+  });
+
   board.repl.inject({
     servos: servos,
     // button: button,
@@ -118,14 +126,15 @@ board.on("ready", function() {
    * @return {function} Function to swing the servo
    */
   function swingServo(servoIndex) {
-    return function() {
-      var servo = servos[servoIndex];
+    var servo = servos[servoIndex];
 
-      servo.max();
-      setTimeout(function() {
-        servo.min();
-      }, constants.servoSwingSpeed);
-    };
+    servo.max();
+    setTimeout(function() {
+      servo.min();
+    }, constants.servoSwingSpeed);
+
+    recorder.save(servoIndex);
+    playSequence = recorder.saved;
   }
 
   function ledOnOff() {
@@ -136,16 +145,16 @@ board.on("ready", function() {
   }
 
   var keymap = {
-    a: swingServo(0),
-    s: swingServo(1),
-    d: swingServo(2),
-    f: swingServo(3),
+    a: 0,
+    s: 1,
+    d: 2,
+    f: 3,
   };
 
   var playKeyMap = function(key) {
-    var keyMapFunc = keymap[key];
-    if (keyMapFunc) {
-      keyMapFunc();
+    var servoIndex = keymap[key];
+    if (servoIndex !== undefined) {
+      swingServo(servoIndex);
       ledOnOff();
     }
   }
@@ -154,7 +163,7 @@ board.on("ready", function() {
     if ((index >= 0) &&
         (index < constants.servos.length)) {
       console.log("Swing", index);
-      swingServo(index)();
+      swingServo(index);
       ledOnOff();
     }
   }
@@ -164,10 +173,10 @@ board.on("ready", function() {
   }
 
   var debouncedPlay = _.debounce(function() {
-    player.play(playSequence, function(keys) {
-      console.log("keys:", keys);
-      _.each(keys, function(key) {
-        playKeyMap(key);
+    player.play(playSequence, function(indices) {
+      console.log("keys:", indices);
+      _.each(indices, function(index) {
+        playServoIndex(index);
       });
     });
   }, constants.buttonDebounce);

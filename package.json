@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "johnny-five": "^0.8.19",
-    "node-static": "latest"
+    "node-static": "latest",
+    "keypress": "^0.2.1"
   },
   "devDependencies": {
     "connect": "^2.24.3",

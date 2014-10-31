@@ -52,7 +52,8 @@ var jsTestFiles = [
 // errors when vendor files can't be minified properly)
 var vendorFiles = [
   path.vendor + "/jquery/jquery.min.js",
-  path.vendor + "/lodash/dist/lodash.min.js"
+  path.vendor + "/lodash/dist/lodash.min.js",
+  path.vendor + "/socket.io/socket.io.js"
 ];
 
 // Ports

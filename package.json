@@ -14,7 +14,12 @@
   "dependencies": {
     "johnny-five": "^0.8.19",
     "node-static": "latest",
-    "keypress": "^0.2.1"
+    "keypress": "^0.2.1",
+    "socket.io": "^1.2.0",
+    "hapi": "^7.2.0",
+    "colors": "^1.0.3",
+    "moment": "^2.8.3",
+    "express": "^4.10.1"
   },
   "devDependencies": {
     "connect": "^2.24.3",

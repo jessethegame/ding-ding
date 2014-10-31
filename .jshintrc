@@ -25,6 +25,7 @@
   "globals": {
     "_": true,
     "$": true,
+    "io": true,
     "define": true,
     "require": true,
     "window" : true,

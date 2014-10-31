@@ -19,3 +19,8 @@ Run the app
     node bin/ding-ding
 
 To close the app, ctrl-c a couple of times.
+
+To start the server
+
+    npm install -g nodemon
+    npm start

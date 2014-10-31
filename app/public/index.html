@@ -6,6 +6,7 @@
     <title>Ding ding</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <!-- <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="css/main.css">
@@ -31,9 +32,13 @@
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- fast click shit -->
+    <!-- fast click & no scroll (for ipad) -->
     <script src="js/fastclick.js"></script>
     <script type="text/javascript">
+      document.ontouchstart = function(e){
+          e.preventDefault();
+      }
+
       window.addEventListener('load', function() {
           FastClick.attach(document.body);
       }, false);

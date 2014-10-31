@@ -430,7 +430,7 @@ html,
 body {
   position: absolute;
   width: calc(100% - .5em);
-  height: calc(100% - .5em);
+  height: calc(100%);
   margin: .25em;
   padding: 0;
 }
@@ -452,10 +452,10 @@ h1 {
   }
 
   100% {
-    top: .4em;
-    left: .4em;
-    right: .4em;
-    bottom: .4em;
+    top: .2em;
+    left: .2em;
+    right: .2em;
+    bottom: .2em;
   }
 }
 
@@ -496,7 +496,7 @@ h1 {
     transition: all 0.1s;
   }
 
-  &:hover::after {
+  &:active::after {
     animation: bounce .05s;
   }
 

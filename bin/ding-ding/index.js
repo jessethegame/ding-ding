@@ -46,6 +46,16 @@ var constants = {
     {
       pin: 6
     }
+  ],
+
+  defaultPlaySeq: [
+    ['a'],
+    ['s'],
+    ['d'],
+    ['f'],
+    ['a', 's'],
+    ['d', 'f'],
+    ['a', 's', 'd', 'f']
   ]
 }
 
@@ -57,6 +67,8 @@ board.on("ready", function() {
   if (typeof process.stdin.setRawMode === 'function') {
     process.stdin.setRawMode(true);
   } // Else not needed?
+
+  var playSequence = constants.defaultPlaySeq;
 
   // var button = new five.Button({
   //   pin: pins.pullUpButton,
@@ -147,16 +159,12 @@ board.on("ready", function() {
     }
   }
 
+  var setPlaySequence = function(seq) {
+    playSequence = seq;
+  }
+
   var debouncedPlay = _.debounce(function() {
-    player.play([
-      ['a'],
-      ['s'],
-      ['d'],
-      ['f'],
-      ['a', 's'],
-      ['d', 'f'],
-      ['a', 's', 'd', 'f']
-    ], function(keys) {
+    player.play(playSequence, function(keys) {
       console.log("keys:", keys);
       _.each(keys, function(key) {
         playKeyMap(key);
@@ -186,7 +194,8 @@ board.on("ready", function() {
   // Return the board and some info
   boardDeferred.resolve({
     board: board,
-    playServo: playServoIndex
+    playServo: playServoIndex,
+    setPlaySequence: setPlaySequence
   });
 });
 

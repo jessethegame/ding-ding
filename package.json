@@ -4,7 +4,8 @@
   "description": "A starttter project for hardware hacks",
   "main": "Gruntfile.js",
   "scripts": {
-    "start": "nodemon bin/server --watch bin/server",
+    "start": "node bin/server",
+    "dev": "nodemon bin/server --watch bin/server",
     "test": "grunt ci:test"
   },
   "engines": {
@@ -19,7 +20,8 @@
     "hapi": "^7.2.0",
     "colors": "^1.0.3",
     "moment": "^2.8.3",
-    "express": "^4.10.1"
+    "express": "^4.10.1",
+    "q": "^1.0.1"
   },
   "devDependencies": {
     "connect": "^2.24.3",

@@ -5,9 +5,11 @@
 
 var keypress = require('keypress');
 var _ = require('lodash');
+var Q = require('q');
 
 var five = require("johnny-five");
 var board = new five.Board();
+var boardDeferred = Q.defer();
 
 var Player = require('./player');
 
@@ -136,6 +138,15 @@ board.on("ready", function() {
     }
   }
 
+  var playServoIndex = function(index) {
+    if ((index >= 0) &&
+        (index < constants.servos.length)) {
+      console.log("Swing", index);
+      swingServo(index)();
+      ledOnOff();
+    }
+  }
+
   var debouncedPlay = _.debounce(function() {
     player.play([
       ['a'],
@@ -171,4 +182,14 @@ board.on("ready", function() {
 
     playKeyMap(key.name);
   });
+
+  // Return the board and some info
+  boardDeferred.resolve({
+    board: board,
+    playServo: playServoIndex
+  });
 });
+
+module.exports = {
+  onReady: boardDeferred.promise
+};

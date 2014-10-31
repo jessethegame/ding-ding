@@ -22,5 +22,9 @@ To close the app, ctrl-c a couple of times.
 
 To start the server
 
-    npm install -g nodemon
     npm start
+
+To start the server in dev mode
+
+    npm install -g nodemon
+    npm run dev

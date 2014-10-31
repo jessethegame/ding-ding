@@ -212,7 +212,10 @@ board.on("ready", function() {
   // Return the board and some info
   boardDeferred.resolve({
     board: board,
-    playServo: playServoIndex
+    playServo: playServoIndex,
+    resetRecorder: function() {
+      recorder.reset();
+    }
   });
 });
 

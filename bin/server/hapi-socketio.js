@@ -18,6 +18,10 @@ exports.register = function(plugin, options, next) {
           resp.playServo(index);
         }
       });
+
+      socket.on('reset', function() {
+        resp.resetRecorder();
+      });
     });
 
     board.events.on('servo', function(obj) {

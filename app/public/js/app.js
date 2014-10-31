@@ -46,9 +46,13 @@
   $(document).keypress(function(event) {
     console.log( "Key", event.which);
 
-    var servoIndex = keyServoIndex[event.which];
-    if (_.isNumber(servoIndex)) {
-      clickButton(servoIndex);
+    if (event.which === 32) {
+      socket.emit('reset');
+    } else {
+      var servoIndex = keyServoIndex[event.which];
+      if (_.isNumber(servoIndex)) {
+        clickButton(servoIndex);
+      }
     }
   });
 })();

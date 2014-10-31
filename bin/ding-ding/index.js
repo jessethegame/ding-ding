@@ -28,7 +28,7 @@ var constants = {
 
   buttonDebounce: 200,
 
-  servoMin: 175,
+  servoMin: 170,
   servoMax: 180,
 
   // Also defines how many servos there are, and

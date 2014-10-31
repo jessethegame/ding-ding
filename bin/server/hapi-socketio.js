@@ -3,6 +3,7 @@
 
 var socketIO = require('socket.io');
 var board = require('../ding-ding');
+var _ = require('lodash');
 
 exports.register = function(plugin, options, next) {
   // this is the hapi specific binding
@@ -17,6 +18,10 @@ exports.register = function(plugin, options, next) {
           resp.playServo(index);
         }
       });
+    });
+
+    board.events.on('servo', function(obj) {
+      socket.emit('servo', obj);
     });
 
   });

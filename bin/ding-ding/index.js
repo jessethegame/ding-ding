@@ -6,6 +6,8 @@
 var keypress = require('keypress');
 var _ = require('lodash');
 var Q = require('q');
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
 
 var five = require("johnny-five");
 var board = new five.Board();
@@ -132,6 +134,10 @@ board.on("ready", function() {
     }, constants.servoSwingSpeed);
 
     recorder.save(servoIndex);
+    // console.log("swing");
+    eventEmitter.emit('servo', {
+      index: servoIndex
+    });
   }
 
   function ledOnOff() {
@@ -211,5 +217,6 @@ board.on("ready", function() {
 });
 
 module.exports = {
-  onReady: boardDeferred.promise
+  onReady: boardDeferred.promise,
+  events: eventEmitter
 };

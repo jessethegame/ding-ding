@@ -15,6 +15,13 @@
     socket.emit('button', { index: index });
   }
 
+  function clearAllActive() {
+    _.each(_.range(4), function(index) {
+      var elemSel = '.servo-' + index;
+      $(elemSel).removeClass("active");
+    });
+  }
+
   _.each(_.range(4), function(index) {
     var elemSel = '.servo-' + index;
     $(elemSel).click(function() {
@@ -22,8 +29,18 @@
     });
   });
 
-  socket.on('connect', function (data) {
+  socket.on('connect', function(data) {
     console.log("Connected to", socketIOUrl);
+
+    socket.on('servo', function(obj) {
+      var index = obj.index;
+      console.log(index);
+
+      clearAllActive();
+
+      var elemSel = '.servo-' + index;
+      $(elemSel).addClass('active');
+    });
   });
 
   $(document).keypress(function(event) {

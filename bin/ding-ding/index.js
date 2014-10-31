@@ -16,6 +16,7 @@ var pins = {
   pullUpButton: 2, // Other pin in GND
   led: 4,          // Negative end in GND
   motor: 5,        // Other pin in GND
+  bigRedButton: 7  // Other pin in GND
 };
 
 var constants = {
@@ -54,8 +55,13 @@ board.on("ready", function() {
     process.stdin.setRawMode(true);
   } // Else not needed?
 
-  var button = new five.Button({
-    pin: pins.pullUpButton,
+  // var button = new five.Button({
+  //   pin: pins.pullUpButton,
+  //   isPullup: true
+  // });
+
+  var bigRedButton = new five.Button({
+    pin: pins.bigRedButton,
     isPullup: true
   });
 
@@ -79,7 +85,7 @@ board.on("ready", function() {
 
   board.repl.inject({
     servos: servos,
-    button: button,
+    // button: button,
     led: led
   });
 
@@ -139,12 +145,14 @@ board.on("ready", function() {
     });
   }, constants.buttonDebounce);
 
-  button.on("down", function(value) {
+  // A normally on button, so need it to read `up`
+  // button.on("down", function(value) {
+  //   debouncedPlay();
+  // });
+
+  // A normally on button, so need it to read `up`
+  bigRedButton.on("up", function(value) {
     debouncedPlay();
-  });
-
-  button.on("up", function() {
-
   });
 
   // Play key map when key is pressed

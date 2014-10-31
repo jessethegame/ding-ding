@@ -35,16 +35,16 @@ var constants = {
   // what index they are
   servos: [
     {
-      pin: 6
-    },
-    {
-      pin: 11
+      pin: 9
     },
     {
       pin: 10
     },
     {
-      pin: 9
+      pin: 11
+    },
+    {
+      pin: 6
     }
   ]
 }

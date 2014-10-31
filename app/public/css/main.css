@@ -4,7 +4,7 @@
 
 /* line 7, /Users/ttt/Work/Dev/ding-ding/app/styles/main.scss */
 .servo-0 {
-  background-color: black; }
+  background-color: pink; }
 
 /* line 11, /Users/ttt/Work/Dev/ding-ding/app/styles/main.scss */
 .servo-1 {
@@ -12,9 +12,8 @@
 
 /* line 15, /Users/ttt/Work/Dev/ding-ding/app/styles/main.scss */
 .servo-2 {
-  background-color: yellow;
-  color: #999 !important; }
-
-/* line 20, /Users/ttt/Work/Dev/ding-ding/app/styles/main.scss */
-.servo-3 {
   background-color: green; }
+
+/* line 19, /Users/ttt/Work/Dev/ding-ding/app/styles/main.scss */
+.servo-3 {
+  background-color: blue; }

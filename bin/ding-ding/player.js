@@ -13,6 +13,10 @@ function Player(config) {
   this.reset = function() {
     self.currentTick = 0;
     self.isPlaying = false;
+
+    if (self.config.onStop) {
+      self.config.onStop();
+    }
   }
 
   /**
@@ -23,6 +27,10 @@ function Player(config) {
   this.play = function(seq, playFunc) {
     self.isPlaying = true;
     var length = seq.length;
+
+    if (self.config.onStart) {
+      self.config.onStart();
+    }
 
     var playTick = function(tick) {
       console.log("playTick", tick);

@@ -15,6 +15,7 @@ var Player = require('./player');
 var pins = {
   pullUpButton: 2, // Other pin in GND
   led: 4,          // Negative end in GND
+  playLed: 8,      // Negative end in GND
   motor: 5,        // Other pin in GND
   bigRedButton: 7  // Other pin in GND
 };
@@ -66,6 +67,7 @@ board.on("ready", function() {
   });
 
   var led = new five.Led(pins.led);
+  var playLed = new five.Led(pins.playLed);
 
   var servos = [];
 
@@ -80,7 +82,13 @@ board.on("ready", function() {
   });
 
   var player = new Player({
-    interval: 500
+    interval: 500,
+    onStart: function() {
+      playLed.on();
+    },
+    onStop: function() {
+      playLed.off();
+    }
   });
 
   board.repl.inject({

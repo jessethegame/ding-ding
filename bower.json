@@ -1,0 +1,14 @@
+{
+  "name": "starttter-hardware",
+  "version": "0.0.1",
+  "main": "Gruntfile.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap/archive/3.0.0-wip.zip",
+    "jquery": "~1.10.x"
+  }
+}

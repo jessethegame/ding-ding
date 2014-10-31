@@ -1,0 +1,21 @@
+{
+  "name": "bootstrap",
+  "version": "3.0.0",
+  "main": [
+    "./dist/js/bootstrap.js",
+    "./dist/css/bootstrap.css"
+  ],
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "_cacheHeaders": {
+    "Content-Length": "1592738",
+    "Content-Type": "application/zip",
+    "Content-Disposition": "attachment; filename=bootstrap-3.0.0-wip.zip"
+  },
+  "_source": "https://github.com/twbs/bootstrap/archive/3.0.0-wip.zip",
+  "_target": "*"
+}

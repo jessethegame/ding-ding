@@ -1,0 +1,28 @@
+/* line 1, /Users/ttt/Work/Dev/starttter-hardware/app/styles/main.scss */
+.rgb-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white; }
+  /* line 10, /Users/ttt/Work/Dev/starttter-hardware/app/styles/main.scss */
+  .rgb-color h1 {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 45px; }
+
+/* line 17, /Users/ttt/Work/Dev/starttter-hardware/app/styles/main.scss */
+.other-color {
+  background-color: black;
+  margin: 20px auto 0;
+  width: 250px;
+  height: 60px;
+  padding: 10px; }
+  /* line 24, /Users/ttt/Work/Dev/starttter-hardware/app/styles/main.scss */
+  .other-color input {
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    font-size: 20px;
+    text-align: center; }

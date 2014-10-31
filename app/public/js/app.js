@@ -1,8 +1,11 @@
 (function() {
   "use strict";
+  var socketIOUrl = 'http://localhost:7771';
+  var socket = io(socketIOUrl);
 
   function clickButton(index) {
-    console.log("click", index);
+    console.log('emit', index);
+    socket.emit('button', { index: index });
   }
 
   _.each(_.range(4), function(index) {
@@ -12,11 +15,8 @@
     });
   });
 
-  // Socket.io
-  var socket = io('http://localhost:7771');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
+  socket.on('connect', function (data) {
+    console.log("Connected to", socketIOUrl);
   });
 })();
 //# sourceMappingURL=app.js.map

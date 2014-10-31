@@ -8,10 +8,11 @@ exports.register = function(plugin, options, next) {
   var io = socketIO.listen(plugin.servers[0].listener);
 
   io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
+
+    socket.on('button', function(data) {
       console.log(data);
     });
+
   });
 
   next();

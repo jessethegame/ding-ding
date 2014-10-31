@@ -12,6 +12,7 @@ function Player(config) {
 
   this.reset = function() {
     self.currentTick = 0;
+    self.isPlaying = false;
   }
 
   /**
